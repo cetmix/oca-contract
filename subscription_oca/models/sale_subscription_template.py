@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 
 
 class SaleSubscriptionTemplate(models.Model):
@@ -100,3 +100,11 @@ class SaleSubscriptionTemplate(models.Model):
             "type": "ir.actions.act_window",
             "domain": [("id", "in", self.product_ids.ids)],
         }
+
+    def copy(self, default=None):
+        """Add '(copy)' suffix when duplicating a template."""
+        # English-only comment: Mirrors standard duplication behavior.
+        default = dict(default or {})
+        if "name" not in default and self.name:
+            default["name"] = _("%s (copy)") % (self.name,)
+        return super().copy(default)

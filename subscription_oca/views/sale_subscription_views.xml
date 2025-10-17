@@ -438,7 +438,8 @@
         <field name="name">view.subscription.close.reason.tree</field>
         <field name="model">sale.subscription.close.reason</field>
         <field name="arch" type="xml">
-            <tree editable="bottom">
+            <tree>
+                <field name="sequence" widget="handle" />
                 <field name="name" />
             </tree>
         </field>
@@ -447,7 +448,7 @@
     <record id="subscription_close_reason_action" model="ir.actions.act_window">
         <field name="name">Close reasons</field>
         <field name="res_model">sale.subscription.close.reason</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
     <record id="sale_subscription_action" model="ir.actions.act_window">
