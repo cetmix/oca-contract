@@ -6,6 +6,7 @@ from odoo.exceptions import ValidationError
 
 class SaleSubscriptionStage(models.Model):
     _name = "sale.subscription.stage"
+    _inherit = ["subscription.copy.mixin"]
     _description = "Subscription stage"
     _order = "sequence, name, id"
 
@@ -37,10 +38,3 @@ class SaleSubscriptionStage(models.Model):
     def _compute_display_name(self):
         for stage in self:
             stage.display_name = stage.name
-
-    def copy(self, default=None):
-        """Ensure duplicated stage gets a translatable '(copy)' suffix."""
-        default = dict(default or {})
-        if "name" not in default and self.name:
-            default["name"] = _("%s (copy)") % (self.name,)
-        return super().copy(default)
