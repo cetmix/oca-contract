@@ -13,7 +13,6 @@ class SubscriptionGenericFieldMixin(models.AbstractModel):
     name = fields.Char(required=True, translate=True)
     sequence = fields.Integer(default=10, index=True)
 
-
     def copy(self, default=None):
         """Add '(copy)' suffix when duplicating a record."""
         default = dict(default or {})

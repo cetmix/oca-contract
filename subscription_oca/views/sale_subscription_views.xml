@@ -438,7 +438,7 @@
         <field name="name">view.subscription.close.reason.tree</field>
         <field name="model">sale.subscription.close.reason</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree editable="bottom">
                 <field name="sequence" widget="handle" />
                 <field name="name" />
             </tree>
