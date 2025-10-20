@@ -9,14 +9,14 @@ class SubscriptionGenericFieldMixin(models.AbstractModel):
 
     _name = "subscription.generic.field.mixin"
     _description = "Generic mixin for subscription-related models"
-
-    # Common fields frequently used across subscription configuration models
+    _order = "sequence, name"
     name = fields.Char(required=True, translate=True)
-    sequence = fields.Integer()
+    sequence = fields.Integer(default=10, index=True)
+
 
     def copy(self, default=None):
         """Add '(copy)' suffix when duplicating a record."""
         default = dict(default or {})
         if "name" not in default and self.name:
-            default["name"] = _("%s (copy)") % (self.name,)
+            default["name"] = _("%s (copy)") % self.name
         return super().copy(default)
