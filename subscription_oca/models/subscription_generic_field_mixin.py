@@ -17,5 +17,5 @@ class SubscriptionGenericFieldMixin(models.AbstractModel):
         """Add '(copy)' suffix when duplicating a record."""
         default = dict(default or {})
         if "name" not in default and self.name:
-            default["name"] = _("$(name)s (copy)", name=self.name)
+            default["name"] = _("%s (copy)", self.name)
         return super().copy(default)
